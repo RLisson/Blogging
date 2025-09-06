@@ -1,10 +1,13 @@
 import express from 'express';
 import fs from 'fs';
 import path from 'path';
+import multer from 'multer';
 
 const app = express();
 const PORT = 3000;
 const DATA_FILE = 'data/posts.json';
+
+const upload = multer();
 
 function Post(title, image, description, content) {
     this.id = Date.now(); 
@@ -72,17 +75,35 @@ function deletePost(id) {
 }
 
 app.use(express.static('public'));
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(express.urlencoded({ extended: true })); // Para processar formulários
+app.use(express.json()); // Para processar JSON
 
 app.get('/', (req, res) => {
     const posts = loadPosts();
     res.render('index.ejs', { posts: posts });
 });
 
-app.post('/posts', (req, res) => {
+const handleFormData = (req, res, next) => {
+    const contentType = req.get('Content-Type');
+    console.log('Middleware - Content-Type:', contentType);
+    
+    if (contentType && contentType.includes('multipart/form-data')) {
+        upload.none()(req, res, next);
+    } else {
+        next();
+    }
+};
+
+app.post('/posts', handleFormData, (req, res) => {
     const { title, image, description, content } = req.body;
+    
+    if (!title || !image || !description || !content) {
+        console.error('Dados incompletos:', { title, image, description, content });
+        return res.status(400).send('Todos os campos são obrigatórios');
+    }
+    
     const newPost = addPost(title, image, description, content);
+    console.log('Post criado:', newPost);
     res.redirect('/');
 });
 
@@ -104,51 +125,9 @@ app.delete('/posts/:id', (req, res) => {
     }
 });
 
-app.get('/add-test-post', (req, res) => {
-    const newPost = addPost(
-        'Post de Teste',
-        'https://picsum.photos/400/300?random=' + Math.floor(Math.random() * 1000),
-        'Este é um post de teste criado dinamicamente.',
-        'Conteúdo completo do post de teste. Você pode adicionar qualquer conteúdo aqui!'
-    );
-    res.json({ 
-        success: true, 
-        message: 'Post criado com sucesso!', 
-        post: newPost,
-        totalPosts: loadPosts().length
-    });
+app.get('/create', (req, res) => {
+    res.render('createpost.ejs');
 });
-
-function initializeData() {
-    const posts = loadPosts();
-    if (posts.length === 0) {
-        console.log('Nenhum post encontrado. Criando posts de exemplo...');
-        addPost(
-            'Meu Primeiro Post',
-            'https://picsum.photos/400/300?random=1',
-            'Este é meu primeiro post no blog. Aqui você encontrará conteúdo interessante sobre tecnologia e programação.',
-            'Conteúdo completo do primeiro post...'
-        );
-        addPost(
-            'Aprendendo JavaScript',
-            'https://picsum.photos/400/300?random=2',
-            'Dicas e truques para dominar JavaScript moderno.',
-            'JavaScript é uma linguagem incrível para desenvolvimento web...'
-        );
-        addPost(
-            'CSS Grid vs Flexbox',
-            'https://picsum.photos/400/300?random=3',
-            'Comparando as duas principais técnicas de layout em CSS.',
-            'Ambas são ferramentas poderosas, mas cada uma tem seu lugar...'
-        );
-        console.log('Posts de exemplo criados!');
-    }
-}
-
-
-
-// Inicializar dados e iniciar servidor
-initializeData();
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

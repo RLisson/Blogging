@@ -1,0 +1,243 @@
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+header {
+    padding: 40px 40px 20px 40px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0 0 15px 0;
+    line-height: 1.2;
+}
+
+main {
+    padding: 20px 40px 40px 40px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+form > div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+label {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+textarea {
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: "Roboto", sans-serif;
+    transition: all 0.3s ease;
+    background: #fafafa;
+    resize: vertical;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    transform: translateY(-1px);
+}
+
+textarea#description {
+    min-height: 100px;
+    max-height: 150px;
+}
+
+textarea#content {
+    min-height: 200px;
+    max-height: 400px;
+}
+
+button[type="submit"] {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+    align-self: center;
+    min-width: 200px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+button[type="submit"]:hover {
+    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+button[type="submit"]:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+/* Efeito de foco visual */
+input[type="text"]:hover,
+textarea:hover {
+    border-color: #b0b8ea;
+    background: #fff;
+}
+
+/* Placeholder styling */
+input[type="text"]::placeholder,
+textarea::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+/* Animação suave para os campos */
+input[type="text"],
+textarea {
+    position: relative;
+}
+
+input[type="text"]:focus::before,
+textarea:focus::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    border-radius: 2px 2px 0 0;
+}
+
+/* Estilo para validação */
+input[type="text"]:valid,
+textarea:valid {
+    border-color: #4caf50;
+}
+
+input[type="text"]:invalid:not(:focus),
+textarea:invalid:not(:focus) {
+    border-color: #e0e0e0;
+}
+
+/* Efeito de loading no botão */
+button[type="submit"]:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Melhorias visuais adicionais */
+form > div {
+    position: relative;
+}
+
+label {
+    position: relative;
+}
+
+label::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    transition: width 0.3s ease;
+}
+
+form > div:focus-within label::after {
+    width: 100%;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        margin: 20px auto;
+        border-radius: 0;
+        box-shadow: none;
+    }
+    
+    header {
+        padding: 30px 20px 15px 20px;
+    }
+    
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    main {
+        padding: 20px;
+    }
+    
+    form {
+        gap: 20px;
+    }
+    
+    input[type="text"],
+    textarea {
+        padding: 12px;
+        font-size: 0.95rem;
+    }
+    
+    button[type="submit"] {
+        min-width: 150px;
+        font-size: 1rem;
+        padding: 12px 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.6rem;
+    }
+    
+    main {
+        padding: 15px;
+    }
+    
+    label {
+        font-size: 1rem;
+    }
+    
+    textarea#description {
+        min-height: 80px;
+    }
+    
+    textarea#content {
+        min-height: 150px;
+    }
+    
+    button[type="submit"] {
+        min-width: 120px;
+        font-size: 0.9rem;
+        padding: 10px 20px;
+    }
+}

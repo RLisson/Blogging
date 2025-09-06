@@ -1,0 +1,8 @@
+{
+  "watch": ["src"],
+  "ext": "js,ts,json,ejs",
+  "ignore": ["src/tests", "src/logs"],
+  "execMap": {
+    "ts": "ts-node"
+  }
+}
