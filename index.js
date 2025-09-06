@@ -129,6 +129,11 @@ app.get('/create', (req, res) => {
     res.render('createpost.ejs');
 });
 
+
+app.get('/about', (req, res) => {
+    res.render('about.ejs');
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
     console.log(`Posts carregados: ${loadPosts().length}`);
