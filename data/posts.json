@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1757189055277,
+    "title": "Meu Primeiro Post",
+    "image": "https://picsum.photos/400/300?random=1",
+    "description": "Este é meu primeiro post no blog. Aqui você encontrará conteúdo interessante sobre tecnologia e programação.",
+    "content": "Conteúdo completo do primeiro post...",
+    "createdAt": "2025-09-06T20:04:15.277Z"
+  },
+  {
+    "id": 1757189055278,
+    "title": "Aprendendo JavaScript",
+    "image": "https://picsum.photos/400/300?random=2",
+    "description": "Dicas e truques para dominar JavaScript moderno.",
+    "content": "JavaScript é uma linguagem incrível para desenvolvimento web...",
+    "createdAt": "2025-09-06T20:04:15.278Z"
+  },
+  {
+    "id": 1757189055278,
+    "title": "CSS Grid vs Flexbox",
+    "image": "https://picsum.photos/400/300?random=3",
+    "description": "Comparando as duas principais técnicas de layout em CSS.",
+    "content": "Ambas são ferramentas poderosas, mas cada uma tem seu lugar...",
+    "createdAt": "2025-09-06T20:04:15.278Z"
+  }
+]

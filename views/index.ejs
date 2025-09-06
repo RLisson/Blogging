@@ -12,12 +12,21 @@
 <body>
     <%- include('header.ejs') %>
     <div class="grid-container">
-        <div class="grid-item">
-            <h2>Post Title</h2>
-            <img src="https://picsum.photos/200/300" alt="Sample Image">
-            <p>Post content goes here...</p>
-            <a href="/posts/1">Read more</a>
-        </div>
+        <% if (posts && posts.length > 0) { %>
+            <% posts.forEach(post => { %>
+                <div class="grid-item">
+                    <img src="<%= post.image %>" alt="<%= post.title %>">
+                    <h2><%= post.title %></h2>
+                    <p><%= post.description %></p>
+                    <a href="/posts/<%= post.id %>">Read more</a>
+                </div>
+            <% }) %>
+        <% } else { %>
+            <div class="grid-item">
+                <h2>Nenhum Post Encontrado</h2>
+                <p>Ainda não há posts no blog. Adicione alguns posts para começar!</p>
+            </div>
+        <% } %>
     </div>
 </body>
 </html>

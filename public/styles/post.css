@@ -1,0 +1,159 @@
+.post-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.post-header {
+    padding: 40px 40px 20px 40px;
+    text-align: center;
+}
+
+.post-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0 0 15px 0;
+    line-height: 1.2;
+}
+
+.post-meta {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.post-date {
+    color: #666;
+    font-size: 0.9rem;
+    padding: 8px 16px;
+    background: #f8f9fa;
+    border-radius: 20px;
+    border: 1px solid #e0e0e0;
+}
+
+.post-image {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+}
+
+.post-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.post-content {
+    padding: 40px;
+}
+
+.post-description {
+    font-size: 1.2rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    font-style: italic;
+    text-align: center;
+    border-left: 4px solid #667eea;
+    padding-left: 20px;
+    background: #f8f9ff;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.post-body {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #333;
+    text-align: left;
+}
+
+.post-body p {
+    margin-bottom: 20px;
+}
+
+.post-actions {
+    padding: 30px 40px 40px 40px;
+    text-align: center;
+}
+
+.btn-back {
+    display: inline-block;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-back:hover {
+    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .post-container {
+        margin: 20px auto;
+        border-radius: 0;
+    }
+    
+    .post-header {
+        padding: 30px 20px 15px 20px;
+    }
+    
+    .post-header h1 {
+        font-size: 2rem;
+    }
+    
+    .post-image {
+        height: 250px;
+    }
+    
+    .post-content {
+        padding: 30px 20px;
+    }
+    
+    .post-description {
+        font-size: 1.1rem;
+        padding: 15px;
+    }
+    
+    .post-body {
+        font-size: 1rem;
+    }
+    
+    .post-actions {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .post-header h1 {
+        font-size: 1.6rem;
+    }
+    
+    .post-image {
+        height: 200px;
+    }
+    
+    .post-content {
+        padding: 20px 15px;
+    }
+    
+    .post-description {
+        font-size: 1rem;
+        padding: 12px;
+    }
+}
