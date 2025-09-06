@@ -1,0 +1,24 @@
+{
+  "name": "blogging",
+  "version": "1.0.0",
+  "description": "Bloggin project with EJS",
+  "homepage": "https://github.com/RLisson/Blogging#readme",
+  "bugs": {
+    "url": "https://github.com/RLisson/Blogging/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RLisson/Blogging.git"
+  },
+  "license": "ISC",
+  "author": "Lucas Risson",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.1.0"
+  }
+}
