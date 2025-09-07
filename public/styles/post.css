@@ -84,6 +84,66 @@
     transform: scale(1.1);
 }
 
+.post-actions-buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.delete-btn {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    border: none;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: white;
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.delete-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.delete-btn:hover::before {
+    left: 100%;
+}
+
+.delete-btn:hover {
+    background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+    transform: translateY(-2px) rotate(-5deg);
+    box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+}
+
+.delete-btn:active {
+    transform: translateY(0) rotate(0deg);
+    box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
+}
+
+.delete-btn svg {
+    width: 20px;
+    height: 20px;
+    stroke-width: 2;
+    transition: transform 0.3s ease;
+}
+
+.delete-btn:hover svg {
+    transform: scale(1.1);
+}
+
 .post-meta {
     display: flex;
     justify-content: center;
@@ -183,15 +243,21 @@
     .post-title-section {
         flex-direction: column;
         align-items: center;
-        gap: 10px;
+        gap: 15px;
     }
     
-    .edit-btn {
+    .post-actions-buttons {
+        gap: 8px;
+    }
+    
+    .edit-btn,
+    .delete-btn {
         width: 40px;
         height: 40px;
     }
     
-    .edit-btn svg {
+    .edit-btn svg,
+    .delete-btn svg {
         width: 18px;
         height: 18px;
     }
@@ -223,12 +289,14 @@
         font-size: 1.6rem;
     }
     
-    .edit-btn {
+    .edit-btn,
+    .delete-btn {
         width: 36px;
         height: 36px;
     }
     
-    .edit-btn svg {
+    .edit-btn svg,
+    .delete-btn svg {
         width: 16px;
         height: 16px;
     }

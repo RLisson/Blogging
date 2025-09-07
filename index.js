@@ -10,13 +10,15 @@ const DATA_FILE = 'data/posts.json';
 
 const upload = multer();
 
-function Post(title, image, description, content) {
-    this.id = Date.now(); 
+class Post {
+  constructor(title, image, description, content) {
+    this.id = Date.now();
     this.title = title;
     this.image = image;
     this.description = description;
     this.content = content;
     this.createdAt = new Date().toISOString();
+  }
 }
 
 function ensureDataDir() {
@@ -118,12 +120,15 @@ app.get('/posts/:id', (req, res) => {
     }
 });
 
-app.delete('/posts/:id', (req, res) => {
-    const deleted = deletePost(req.params.id);
+// Rota POST para deletar posts via formulário
+app.post('/posts/:id/delete', (req, res) => {
+    const postId = req.params.id;
+    const deleted = deletePost(postId);
+    
     if (deleted) {
-        res.json({ success: true, message: 'Post deletado com sucesso' });
+        res.redirect('/');
     } else {
-        res.status(404).json({ success: false, message: 'Post não encontrado' });
+        res.status(404).send('Post não encontrado');
     }
 });
 
@@ -138,11 +143,6 @@ app.get('/about', (req, res) => {
 
 // Rota POST simples para atualização de posts
 app.post('/posts/:id/update', handleFormData, (req, res) => {
-    console.log('=== DEBUG POST /posts/:id/update ===');
-    console.log('Post ID:', req.params.id);
-    console.log('Body:', req.body);
-    console.log('================================');
-    
     const postId = req.params.id;
     const posts = loadPosts();
     const postIndex = posts.findIndex(post => post.id == postId);
@@ -159,20 +159,12 @@ app.post('/posts/:id/update', handleFormData, (req, res) => {
         return res.status(400).send('Todos os campos são obrigatórios');
     }
     
-    console.log('Dados antes da atualização:', posts[postIndex]);
-    
-    // Atualizar o post
     posts[postIndex].title = title;
     posts[postIndex].image = image;
     posts[postIndex].description = description;
     posts[postIndex].content = content;
-    
-    console.log('Dados após atualização:', posts[postIndex]);
-    
-    // Salvar as alterações
-    const saveResult = savePosts(posts);
-    console.log('Resultado do save:', saveResult);
-    
+
+    savePosts(posts);
     res.redirect(`/posts/${postId}`);
 });
 
