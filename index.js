@@ -2,6 +2,7 @@ import express from 'express';
 import fs from 'fs';
 import path from 'path';
 import multer from 'multer';
+import methodOverride from 'method-override';
 
 const app = express();
 const PORT = 3000;
@@ -77,6 +78,7 @@ function deletePost(id) {
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true })); // Para processar formulários
 app.use(express.json()); // Para processar JSON
+app.use(methodOverride('_method')); // Para suportar PUT/DELETE via formulários
 
 app.get('/', (req, res) => {
     const posts = loadPosts();
@@ -132,6 +134,54 @@ app.get('/create', (req, res) => {
 
 app.get('/about', (req, res) => {
     res.render('about.ejs');
+});
+
+// Rota POST simples para atualização de posts
+app.post('/posts/:id/update', handleFormData, (req, res) => {
+    console.log('=== DEBUG POST /posts/:id/update ===');
+    console.log('Post ID:', req.params.id);
+    console.log('Body:', req.body);
+    console.log('================================');
+    
+    const postId = req.params.id;
+    const posts = loadPosts();
+    const postIndex = posts.findIndex(post => post.id == postId);
+    
+    if (postIndex === -1) {
+        console.error('Post não encontrado com ID:', postId);
+        return res.status(404).send('Post não encontrado');
+    }
+    
+    const { title, image, description, content } = req.body;
+    
+    if (!title || !image || !description || !content) {
+        console.error('Dados incompletos:', { title, image, description, content });
+        return res.status(400).send('Todos os campos são obrigatórios');
+    }
+    
+    console.log('Dados antes da atualização:', posts[postIndex]);
+    
+    // Atualizar o post
+    posts[postIndex].title = title;
+    posts[postIndex].image = image;
+    posts[postIndex].description = description;
+    posts[postIndex].content = content;
+    
+    console.log('Dados após atualização:', posts[postIndex]);
+    
+    // Salvar as alterações
+    const saveResult = savePosts(posts);
+    console.log('Resultado do save:', saveResult);
+    
+    res.redirect(`/posts/${postId}`);
+});
+
+app.get('/posts/:id/edit', (req, res) => {
+    const post = getPostById(req.params.id);
+    if (!post) {
+        return res.status(404).send('Post não encontrado');
+    }
+    res.render('editpost.ejs', { post: post });
 });
 
 app.listen(PORT, () => {

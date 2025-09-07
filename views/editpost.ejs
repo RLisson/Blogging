@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= post.title %> - Risson Blog</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/styles/header.css">
+    <link rel="stylesheet" href="/styles/createpost.css">
+</head>
+
+<body>
+    <%- include('header.ejs') %>
+        <div class="container">
+            <header>
+                <h1>Editar Post</h1>
+            </header>
+            <main>
+                <form action="/posts/<%= post.id %>/update" method="POST" enctype="application/x-www-form-urlencoded">
+                    <div>
+                        <label for="title">Título do Post</label>
+                        <input type="text" id="title" name="title" placeholder="Digite o título do seu post..." value="<%= post.title %>" required>
+                    </div>
+                    <div>
+                        <label for="image">URL da Imagem</label>
+                        <input type="text" id="image" name="image" placeholder="https://exemplo.com/imagem.jpg" value="<%= post.image %>" required>
+                    </div>
+                    <div>
+                        <label for="description">Descrição Breve</label>
+                        <textarea id="description" name="description" placeholder="Escreva uma descrição resumida do seu post..." required><%= post.description %></textarea>
+                    </div>
+                    <div>
+                        <label for="content">Conteúdo do Post</label>
+                        <textarea id="content" name="content" placeholder="Escreva o conteúdo completo do seu post aqui..." required><%= post.content %></textarea>
+                    </div>
+                    <button type="submit">Atualizar Post</button>
+                </form>
+            </main>
+        </div>
+</body>
+</html>
